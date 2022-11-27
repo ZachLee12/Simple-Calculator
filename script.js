@@ -42,6 +42,7 @@ let display = document.querySelector(".display")
 let num1Display = document.querySelector(".num1")
 let num2Display = document.querySelector(".num2")
 let operatorDisplay = document.querySelector(".operatorDisplay")
+let decimalPointClicked = false;
 
 operators.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -52,17 +53,12 @@ operators.forEach((button) => {
             result = operate(operator, parseFloat(num1), parseFloat(num2))
 
             console.log("result: " + result);
-            num1 = Math.round(result*100)/100
+            num1 = Math.round(result * 100) / 100
             num2 = "";
         }
-
-
-        display.textContent = Math.round(result*100)/100
+        
         operator = button.textContent
-        console.log("Clicked: " + e.target.textContent)
-        operatorDisplay.textContent = operator;
-        num1Display.textContent = num1;
-        num2Display.textContent = num2;
+        updateDisplay()
     })
 })
 
@@ -74,10 +70,7 @@ numberButtons.forEach((button) => {
             num2 += button.textContent
         }
 
-        display.textContent = Math.round(result*100)/100
-        num1Display.textContent = num1;
-        num2Display.textContent = num2;
-
+        updateDisplay()
         console.log("Clicked: " + e.target.textContent)
     })
 })
@@ -86,11 +79,11 @@ document.querySelector(".equals").addEventListener("click", (e) => {
     if (num2 != "") {
         result = operate(operator, parseFloat(num1), parseFloat(num2))
         console.log("result: " + result);
-        num1 = Math.round(result*100)/100;
+        num1 = Math.round(result * 100) / 100;
         num2 = "";
     }
 
-    display.textContent = Math.round(result*100)/100
+    updateDisplay()
     console.log("Clicked: " + e.target.textContent)
 })
 
@@ -111,9 +104,23 @@ document.querySelector(".clear").addEventListener("click", (e) => {
 document.getElementById("%").addEventListener("click", () => {
     result /= 100;
     num1 = result;
-    display.textContent = result;
+    updateDisplay()
 })
 
+document.querySelector(".decimalPoint").addEventListener("click", (e) => {
+    if (!decimalPointClicked) {
+        num1 += e.target.textContent;
+    }
+    updateDisplay()
+    decimalPointClicked = true;
+})
+
+function updateDisplay() {
+    display.textContent = Math.round(result * 100) / 100;
+    num1Display.textContent = num1;
+    num2Display.textContent = num2;
+    operatorDisplay.textContent = operator
+}
 
 //BUG sequence: 9, +, =, 3, =
 //then it breaks
