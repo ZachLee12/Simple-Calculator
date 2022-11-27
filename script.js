@@ -106,7 +106,7 @@ document.querySelector(".clear").addEventListener("click", (e) => {
 
 document.getElementById("%").addEventListener("click", () => {
     result /= 100;
-    num1 = result;
+    num1 = Math.round(result * 100) / 100;
     updateDisplay()
 })
 
