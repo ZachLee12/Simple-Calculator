@@ -1,0 +1,119 @@
+
+function add(...num) {
+    return num.reduce((accummulator, current) => accummulator + current)
+}
+
+function subtract(...num) {
+    return num.reduce((accummulator, current) => accummulator - current)
+}
+
+function multiply(...num) {
+    return num.reduce((accummulator, current) => accummulator * current)
+}
+
+function divide(...num) {
+    return num.reduce((accummulator, current) => accummulator / current)
+}
+
+function operate(operator, num1, num2) {
+    switch (operator) {
+        case "+":
+            return add(num1, num2)
+
+        case "-":
+            return subtract(num1, num2)
+
+        case "*":
+            return multiply(num1, num2)
+
+        case "/":
+            return divide(num1, num2)
+    }
+}
+
+let operators = document.querySelectorAll(".operator")
+let operator = "";
+let firstOperatorClicked = false;
+let numberButtons = document.querySelectorAll(".number")
+let num1 = ""
+let num2 = ""
+let result = 0;
+let display = document.querySelector(".display")
+let num1Display = document.querySelector(".num1")
+let num2Display = document.querySelector(".num2")
+let operatorDisplay = document.querySelector(".operatorDisplay")
+
+operators.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        if (num1 === "") return -1;
+        firstOperatorClicked = true;
+
+        if (num2 != "") {
+            result = operate(operator, parseFloat(num1), parseFloat(num2))
+
+            console.log("result: " + result);
+            num1 = Math.round(result*100)/100
+            num2 = "";
+        }
+
+
+        display.textContent = Math.round(result*100)/100
+        operator = button.textContent
+        console.log("Clicked: " + e.target.textContent)
+        operatorDisplay.textContent = operator;
+        num1Display.textContent = num1;
+        num2Display.textContent = num2;
+    })
+})
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        if (!firstOperatorClicked) {
+            num1 += button.textContent
+        } else { //if firstOperatorClicked
+            num2 += button.textContent
+        }
+
+        display.textContent = Math.round(result*100)/100
+        num1Display.textContent = num1;
+        num2Display.textContent = num2;
+
+        console.log("Clicked: " + e.target.textContent)
+    })
+})
+
+document.querySelector(".equals").addEventListener("click", (e) => {
+    if (num2 != "") {
+        result = operate(operator, parseFloat(num1), parseFloat(num2))
+        console.log("result: " + result);
+        num1 = Math.round(result*100)/100;
+        num2 = "";
+    }
+
+    display.textContent = Math.round(result*100)/100
+    console.log("Clicked: " + e.target.textContent)
+})
+
+document.querySelector(".clear").addEventListener("click", (e) => {
+    display.textContent = "display"
+    num1Display.textContent = ""
+    num2Display.textContent = ""
+    operatorDisplay.textContent = ""
+    num1 = "";
+    num2 = "";
+    result = 0;
+    operator = "";
+    firstOperatorClicked = false;
+
+    console.log("Clicked: " + e.target.textContent)
+})
+
+document.getElementById("%").addEventListener("click", () => {
+    result /= 100;
+    num1 = result;
+    display.textContent = result;
+})
+
+
+//BUG sequence: 9, +, =, 3, =
+//then it breaks

@@ -1,0 +1,92 @@
+table {
+    border: 2px solid black;
+    margin: auto;
+    width: 400px;
+    height: 450px;
+    table-layout: fixed;
+    padding: 5px;
+    background-color: #AAAAAA;
+    border-radius: 8px;
+}
+
+td {
+
+    /* change this later */
+    padding: 5px;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    background-color: #eee;
+
+    /* change this later */
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+.displayBox {
+    background-color: #eee;
+    width: 99%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex-direction: column;
+}
+
+.displayBox>div {
+    padding-right: 10px;
+}
+
+.historyBox {
+    display: flex;
+    width:350px;
+    justify-content: right;
+}
+
+.historyBox>div{
+    width: 30px;
+}
+
+.display {
+    display: block;
+    width: 350px;
+    text-align: right;
+    font-size: 25px;
+}
+
+
+.clear {
+    background-color: #faa;
+}
+
+.clear:hover {
+    background-color: #e99;
+}
+
+.clear:active {
+    background-color: #d88;
+}
+
+.delete {
+    background-color: #aaf;
+}
+
+.delete:hover {
+    background-color: #99e;
+}
+
+.delete:active {
+    background-color: #88d;
+}
