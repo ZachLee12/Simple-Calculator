@@ -56,7 +56,7 @@ operators.forEach((button) => {
             num1 = Math.round(result * 100) / 100
             num2 = "";
         }
-        
+
         operator = button.textContent
         updateDisplay()
     })
@@ -123,6 +123,15 @@ function updateDisplay() {
     num2Display.textContent = num2;
     operatorDisplay.textContent = operator
 }
+
+document.querySelector(".delete").addEventListener("click", () => {
+    if (!firstOperatorClicked) {
+        num1 = num1.replace(num1.charAt(num1.length-1),"")        
+    } else {
+        num2 = num2.replace(num2.charAt(num2.length-1),"")   
+    }
+    updateDisplay();
+})
 
 //BUG sequence: 9, +, =, 3, =
 //then it breaks
