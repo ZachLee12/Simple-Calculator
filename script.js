@@ -42,7 +42,7 @@ let display = document.querySelector(".display")
 let num1Display = document.querySelector(".num1")
 let num2Display = document.querySelector(".num2")
 let operatorDisplay = document.querySelector(".operatorDisplay")
-let decimalPointClicked = false;
+let decimalPointNum1 = false;
 
 operators.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -58,7 +58,6 @@ operators.forEach((button) => {
         }
         
         operator = button.textContent
-        decimalPointClicked = false;
         updateDisplay()
     })
 })
@@ -109,11 +108,13 @@ document.getElementById("%").addEventListener("click", () => {
 })
 
 document.querySelector(".decimalPoint").addEventListener("click", (e) => {
-    if (!decimalPointClicked) {
+    if (!decimalPointNum1) {
         num1 += e.target.textContent;
+    } else {
+        num2 += e.target.textContent;
     }
     updateDisplay()
-    decimalPointClicked = true;
+    decimalPointNum1 = true;
 })
 
 function updateDisplay() {
