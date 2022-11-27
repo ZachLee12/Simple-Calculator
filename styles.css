@@ -56,7 +56,16 @@ button:active {
 }
 
 .historyBox>div{
-    width: 30px;
+    width: 80px;
+}
+
+.historyBox>.num1{
+    text-align: right;
+}
+
+.historyBox>.operatorDisplay{
+    text-align: center;
+    width: 50px;
 }
 
 .display {

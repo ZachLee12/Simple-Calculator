@@ -58,6 +58,7 @@ operators.forEach((button) => {
         }
         
         operator = button.textContent
+        decimalPointClicked = false;
         updateDisplay()
     })
 })
