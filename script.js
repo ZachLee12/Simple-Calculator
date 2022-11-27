@@ -43,6 +43,7 @@ let num1Display = document.querySelector(".num1")
 let num2Display = document.querySelector(".num2")
 let operatorDisplay = document.querySelector(".operatorDisplay")
 let decimalPointNum1 = false;
+let decimalPointNum2 = false;
 
 operators.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -58,6 +59,7 @@ operators.forEach((button) => {
         }
 
         operator = button.textContent
+        decimalPointNum2 = false;
         updateDisplay()
     })
 })
@@ -84,6 +86,7 @@ document.querySelector(".equals").addEventListener("click", (e) => {
     }
 
     updateDisplay()
+    decimalPointNum2 = false;
     console.log("Clicked: " + e.target.textContent)
 })
 
@@ -111,7 +114,13 @@ document.querySelector(".decimalPoint").addEventListener("click", (e) => {
     if (!decimalPointNum1) {
         num1 += e.target.textContent;
     } else {
-        num2 += e.target.textContent;
+        if (firstOperatorClicked) {
+            if (!decimalPointNum2) {
+                num2 += e.target.textContent;
+            }
+            decimalPointNum2 = true;
+        }
+
     }
     updateDisplay()
     decimalPointNum1 = true;
@@ -126,9 +135,9 @@ function updateDisplay() {
 
 document.querySelector(".delete").addEventListener("click", () => {
     if (!firstOperatorClicked) {
-        num1 = num1.replace(num1.charAt(num1.length-1),"")        
+        num1 = num1.replace(num1.charAt(num1.length - 1), "")
     } else {
-        num2 = num2.replace(num2.charAt(num2.length-1),"")   
+        num2 = num2.replace(num2.charAt(num2.length - 1), "")
     }
     updateDisplay();
 })
