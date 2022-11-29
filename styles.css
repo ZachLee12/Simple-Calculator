@@ -101,5 +101,7 @@ button:active {
 }
 
 .num1, .num2{
-    overflow:auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
