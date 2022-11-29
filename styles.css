@@ -99,3 +99,7 @@ button:active {
 .delete:active {
     background-color: #88d;
 }
+
+.num1, .num2{
+    overflow:auto;
+}
