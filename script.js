@@ -127,8 +127,14 @@ document.querySelector(".decimalPoint").addEventListener("click", (e) => {
 
 document.querySelector(".delete").addEventListener("click", () => {
     if (!firstOperatorClicked) {
+        if (num1.charAt(num1.length - 1) === ".") {
+            decimalPointNum1 = true;
+        }
         num1 = num1.replace(num1.charAt(num1.length - 1), "")
     } else {
+        if (num2.charAt(num2.length - 1) === ".") {
+            decimalPointNum2 = true;
+        }
         num2 = num2.replace(num2.charAt(num2.length - 1), "")
     }
     updateDisplay();
@@ -151,6 +157,7 @@ function clear() {
     result = 0;
     operator = "";
     firstOperatorClicked = false;
-
     console.log("Clicked: " + e.target.textContent)
 }
+
+//BUG! press 663.3, then delete, it will become 66.3! not 663.
