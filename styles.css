@@ -5,7 +5,7 @@ table {
     height: 450px;
     table-layout: fixed;
     padding: 5px;
-    background-color: #AAAAAA;
+    background-color: #53aeca;
     border-radius: 8px;
 }
 
@@ -77,27 +77,27 @@ button:active {
 
 
 .clear {
-    background-color: #faa;
+    background-color: #8ad048;
 }
 
 .clear:hover {
-    background-color: #e99;
+    background-color: #7dbc43;
 }
 
 .clear:active {
-    background-color: #d88;
+    background-color: #649635;
 }
 
 .delete {
-    background-color: #aaf;
+    background-color: #e45b5b;
 }
 
 .delete:hover {
-    background-color: #99e;
+    background-color: #d65656;
 }
 
 .delete:active {
-    background-color: #88d;
+    background-color: #be4d4d;
 }
 
 .num1, .num2{
