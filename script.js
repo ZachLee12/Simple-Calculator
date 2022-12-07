@@ -16,6 +16,9 @@ function divide(...num) {
 }
 
 function operate(operator, num1, num2) {
+    if (operator == "/" && num2 == "0") {
+        return "No dividing by 0!!"
+    }
     switch (operator) {
         case "+":
             return add(num1, num2)
@@ -55,16 +58,22 @@ operators.forEach((button) => {
             if (num2 === ".") {
                 num2 = 0;
             }
-            result = operate(operator, parseFloat(num1), parseFloat(num2))
 
+            result = operate(operator, parseFloat(num1), parseFloat(num2))
             console.log("result: " + result);
-            num1 = Math.round(result * 100) / 100
+            num1 = result;
             num2 = "";
         }
 
-        operator = button.textContent
         decimalPointNum2 = false;
-        updateDisplay()
+        operator = button.textContent //change operator, after previous operator has already been executed!
+        if (isNaN(result)) {
+            num1 = 0;
+            updateDisplay();
+            result = 0;
+        } else {
+            updateDisplay()
+        }
     })
 })
 
@@ -88,7 +97,7 @@ document.querySelector(".equals").addEventListener("click", (e) => {
         }
         result = operate(operator, parseFloat(num1), parseFloat(num2))
         console.log("result: " + result);
-        num1 = Math.round(result * 100) / 100;
+        num1 = result
         num2 = "";
     }
 
@@ -121,7 +130,7 @@ document.querySelector(".decimalPoint").addEventListener("click", (e) => {
     }
     updateDisplay()
     decimalPointNum1 = false;
-    
+
 }
 )
 
@@ -141,7 +150,7 @@ document.querySelector(".delete").addEventListener("click", () => {
 })
 
 function updateDisplay() {
-    display.textContent = Math.round(result * 100) / 100;
+    display.textContent = result;
     num1Display.textContent = num1;
     num2Display.textContent = num2;
     operatorDisplay.textContent = operator
@@ -157,7 +166,7 @@ function clear() {
     result = 0;
     operator = "";
     firstOperatorClicked = false;
-    console.log("Clicked: " + e.target.textContent)
+    decimalPointNum1 = true;
 }
 
 //BUG! press 663.3, then delete, it will become 66.3! not 663.
