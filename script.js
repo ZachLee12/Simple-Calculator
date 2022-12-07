@@ -216,7 +216,7 @@ window.addEventListener("keydown", function (e) {
         }
     }
 
-    if (e.key === "Enter") {
+    if (e.key.toLowerCase() === "c" ) {
         if (num2 != "") {
             if (num2 === ".") {
                 num2 = 0;
