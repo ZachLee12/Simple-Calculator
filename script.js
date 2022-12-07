@@ -230,6 +230,44 @@ window.addEventListener("keydown", function (e) {
         updateDisplay()
         decimalPointNum2 = false;
     }
+
+    if (e.key === "Backspace") {
+        if (num1.charAt(num1.length - 1) === ".") {
+            decimalPointNum1 = true;
+        }
+
+        if (num2 === "") {
+            firstOperatorClicked = false;
+            num1 = num1.slice(0, -1)
+            operator = ""
+        } else {
+            if (!firstOperatorClicked) {
+                num1 = num1.slice(0, -1)
+            } else {
+                if (num2.charAt(num2.length - 1) === ".") {
+                    decimalPointNum2 = false;
+                }
+                num2 = num2.slice(0, -1)
+            }
+        }
+        updateDisplay();
+    }
+
+    if (e.key === ".") {
+        if (decimalPointNum1 == true) {
+            num1 += e.key;
+        } else {
+            if (firstOperatorClicked) {
+                if (!decimalPointNum2) {
+                    num2 += e.key;
+                }
+                decimalPointNum2 = true;
+            }
+
+        }
+        updateDisplay()
+        decimalPointNum1 = false;
+    }
 })
 
 
