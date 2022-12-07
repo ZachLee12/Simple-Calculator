@@ -103,10 +103,9 @@ document.querySelector(".equals").addEventListener("click", (e) => {
 
     updateDisplay()
     decimalPointNum2 = false;
-    console.log("Clicked: " + e.target.textContent)
 })
 
-document.querySelector(".clear").addEventListener("click", (e) => {
+document.querySelector(".clear").addEventListener("click", () => {
     clear();
 })
 
@@ -141,16 +140,16 @@ document.querySelector(".delete").addEventListener("click", () => {
 
     if (num2 === "") {
         firstOperatorClicked = false;
-        num1 = num1.slice(0,-1)
+        num1 = num1.slice(0, -1)
         operator = ""
     } else {
         if (!firstOperatorClicked) {
-            num1 = num1.slice(0,-1)
+            num1 = num1.slice(0, -1)
         } else {
             if (num2.charAt(num2.length - 1) === ".") {
                 decimalPointNum2 = false;
             }
-            num2 = num2.slice(0,-1)
+            num2 = num2.slice(0, -1)
         }
     }
     updateDisplay();
@@ -175,3 +174,62 @@ function clear() {
     firstOperatorClicked = false;
     decimalPointNum1 = true;
 }
+
+//keyboard inputs
+window.addEventListener("keydown", function (e) {
+    let validNumberInputs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    let validOperatorInputs = ["/", "+", "-", "*"];
+    //general keys or numpad
+    if (validNumberInputs.includes(e.key)) {
+        if (!firstOperatorClicked) {
+            num1 += e.key
+        } else { //if firstOperatorClicked
+            num2 += e.key
+        }
+        updateDisplay()
+    };
+
+    if (validOperatorInputs.includes(e.key)) {
+        if (num1 === "") return -1;
+        firstOperatorClicked = true;
+        decimalPointNum1 = false;
+
+        if (num2 != "") {
+            if (num2 === ".") {
+                num2 = 0;
+            }
+
+            result = operate(operator, parseFloat(num1), parseFloat(num2))
+            console.log("result: " + result);
+            num1 = result.toString();
+            num2 = "";
+        }
+
+        decimalPointNum2 = false;
+        operator = e.key //change operator, after previous operator has already been executed!
+        if (isNaN(result)) {
+            num1 = 0;
+            updateDisplay();
+            result = 0;
+        } else {
+            updateDisplay()
+        }
+    }
+
+    if (e.key === "Enter") {
+        if (num2 != "") {
+            if (num2 === ".") {
+                num2 = 0;
+            }
+            result = operate(operator, parseFloat(num1), parseFloat(num2))
+            console.log("result: " + result);
+            num1 = result.toString();
+            num2 = "";
+        }
+
+        updateDisplay()
+        decimalPointNum2 = false;
+    }
+})
+
+
