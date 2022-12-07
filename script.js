@@ -61,7 +61,7 @@ operators.forEach((button) => {
 
             result = operate(operator, parseFloat(num1), parseFloat(num2))
             console.log("result: " + result);
-            num1 = result;
+            num1 = result.toString();
             num2 = "";
         }
 
@@ -97,7 +97,7 @@ document.querySelector(".equals").addEventListener("click", (e) => {
         }
         result = operate(operator, parseFloat(num1), parseFloat(num2))
         console.log("result: " + result);
-        num1 = result
+        num1 = result.toString();
         num2 = "";
     }
 
@@ -135,16 +135,23 @@ document.querySelector(".decimalPoint").addEventListener("click", (e) => {
 )
 
 document.querySelector(".delete").addEventListener("click", () => {
-    if (!firstOperatorClicked) {
-        if (num1.charAt(num1.length - 1) === ".") {
-            decimalPointNum1 = true;
-        }
-        num1 = num1.replace(num1.charAt(num1.length - 1), "")
+    if (num1.charAt(num1.length - 1) === ".") {
+        decimalPointNum1 = true;
+    }
+
+    if (num2 === "") {
+        firstOperatorClicked = false;
+        num1 = num1.slice(0,-1)
+        operator = ""
     } else {
-        if (num2.charAt(num2.length - 1) === ".") {
-            decimalPointNum2 = true;
+        if (!firstOperatorClicked) {
+            num1 = num1.slice(0,-1)
+        } else {
+            if (num2.charAt(num2.length - 1) === ".") {
+                decimalPointNum2 = false;
+            }
+            num2 = num2.slice(0,-1)
         }
-        num2 = num2.replace(num2.charAt(num2.length - 1), "")
     }
     updateDisplay();
 })
@@ -168,5 +175,3 @@ function clear() {
     firstOperatorClicked = false;
     decimalPointNum1 = true;
 }
-
-//BUG! press 663.3, then delete, it will become 66.3! not 663.
