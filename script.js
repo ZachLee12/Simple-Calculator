@@ -156,7 +156,7 @@ document.querySelector(".delete").addEventListener("click", () => {
 })
 
 function updateDisplay() {
-    display.textContent = result;
+    display.textContent = Number(result.toFixed(4));
     num1Display.textContent = num1;
     num2Display.textContent = num2;
     operatorDisplay.textContent = operator
